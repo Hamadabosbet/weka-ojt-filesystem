@@ -1,5 +1,4 @@
-// Toolbar.js
-import React, { useState } from "react"; // Import useState
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -13,12 +12,17 @@ import PlusDropdown from "./PlusOptions";
 import "../css/Toolbar.css";
 import axios from "axios";
 
-function Toolbar({ onSort, onSearch }) {
-  const [searchTerm, setSearchTerm] = useState([]); // State to store the search term
+function Toolbar({ onSort, onSearch,onCreateFolder }) {
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-    onSearch(searchTerm); // Pass the search term to the parent component
+    event.preventDefault();
+    onSearch(searchTerm);
+  };
+
+  const handleCreateFolder = () => {
+    // Trigger folder creation and inform the parent component
+    onCreateFolder();
   };
 
   return (
@@ -47,7 +51,7 @@ function Toolbar({ onSort, onSearch }) {
           className="d-flex justify-content-end"
         >
           <div className="plus-dropdown mr-3">
-            <PlusDropdown />
+            <PlusDropdown onCreateFolder={handleCreateFolder} />
           </div>
           <Dropdown className="sort-dropdown mr-3">
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">

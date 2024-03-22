@@ -4,7 +4,7 @@ import CreateFolder from './CreateFolder';
 import UploadFile from './UploadFile';
 import React, { useState } from 'react';
 
-const PlusDropdown = () => {
+const PlusDropdown = ({onCreateFolder }) => {
 
   const [showUpload, setShowUpload] = useState(false);
   const [showNewFolder, setShowNewFolder] = useState(false);
@@ -20,6 +20,7 @@ const handleOptionSelect = (selectedOption) => {
     setShowUpload(true); // Show the modal when "Details" option is selected
   } else if (selectedOption.value === "newfolder") {
     setShowNewFolder(true);
+    onCreateFolder();
   }
 
 };

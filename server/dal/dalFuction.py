@@ -75,8 +75,8 @@ def get_myfiles(user_id: int, page: int, sorted_by: str = "upload_date") -> List
             folder_id=file_data[3],
             size=file_data[4],
             is_deleted=bool(file_data[5]),  # Convert to bool
-            path=file_data[6],
-            upload_date=file_data[7],
+            upload_date=file_data[6],
+            path=file_data[7],
             group_version_id=file_data[8]
         )
         files.append(file)

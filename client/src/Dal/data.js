@@ -135,9 +135,6 @@ async function registerUser(name, email, password) {
   }
 }
 
-
-
-
 async function Forget_password(email) {
   // chick the foemate of the email
   if (!Validate_email_format(email)) return "Invalid email format";
@@ -167,8 +164,6 @@ async function Forget_password(email) {
   }
 }
 
-
-
 // Function to add a file to a user's account
 // function addFile(userId, path, file) {
 //   const fileId = Object.keys(files).length + 1;
@@ -178,13 +173,16 @@ async function Forget_password(email) {
 
 async function addFolder(folder_id, folder_name) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/folder/${folder_id}/create?folder_name=${folder_name}`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://127.0.0.1:8000/folder/${folder_id}/create?folder_name=${folder_name}`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (response.ok) {
       return true; // Folder created successfully
@@ -239,8 +237,6 @@ async function download(fileId) {
     throw error;
   }
 }
-
-
 
 async function renameFile(fileId, newName) {
   try {
@@ -310,7 +306,6 @@ async function getMyDeletedFiles() {
       credentials: "include", // Include cookies in the request
     });
 
-
     if (response.ok) {
       const data = await response.json(); // Parsing response JSON
       return data;
@@ -337,7 +332,7 @@ async function delete_file(file_id) {
   try {
     const response = await fetch(`http://127.0.0.1:8000/file/${file_id}`, {
       method: "PUT",
-      headers:{
+      headers: {
         "Content-Type": "application/json",
       },
       credentials: "include", // Include cookies in the request
@@ -355,7 +350,7 @@ async function delete_folder(folder_id) {
   try {
     const response = await fetch(`http://127.0.0.1:8000/folder/${folder_id}`, {
       method: "PUT",
-      headers:{
+      headers: {
         "Content-Type": "application/json",
       },
       credentials: "include", // Include cookies in the request
@@ -375,9 +370,9 @@ async function fileDeletion(file_id) {
       `http://127.0.0.1:8000/deleted/files/${file_id}`,
       {
         method: "DELETE",
-        headers:{
-        "Content-Type": "application/json",
-      },
+        headers: {
+          "Content-Type": "application/json",
+        },
         credentials: "include", // Include cookies in the request
       }
     );
@@ -392,16 +387,16 @@ async function fileDeletion(file_id) {
 
 async function folderDeletion(folder_id) {
   try {
-      const response = await fetch(
-        `http://127.0.0.1:8000/deleted/folders/${folder_id}`,
-        {
-          method: "DELETE",
-          headers:{
+    const response = await fetch(
+      `http://127.0.0.1:8000/deleted/folders/${folder_id}`,
+      {
+        method: "DELETE",
+        headers: {
           "Content-Type": "application/json",
-           },
-          credentials: "include", // Include cookies in the request
-        }
-      );
+        },
+        credentials: "include", // Include cookies in the request
+      }
+    );
     console.log("Folder permanently deleted successfully:", response);
     return response;
   } catch (error) {
@@ -413,16 +408,19 @@ async function folderDeletion(folder_id) {
 // Function to restore a deleted file
 async function restoreDeletedFile(file_id) {
   try {
-      const response = await fetch(`http://127.0.0.1:8000/deleted/files/restore/${file_id}`, {
-      method: "PUT",
-      headers: {
+    const response = await fetch(
+      `http://127.0.0.1:8000/deleted/files/restore/${file_id}`,
+      {
+        method: "PUT",
+        headers: {
           "Content-Type": "application/json",
-      },
-      credentials: "include", // Include cookies in the request
-      });
+        },
+        credentials: "include", // Include cookies in the request
+      }
+    );
 
-      console.log("File restored successfully:", response);
-      return response;
+    console.log("File restored successfully:", response);
+    return response;
   } catch (error) {
     console.error(error);
   }
@@ -431,13 +429,16 @@ async function restoreDeletedFile(file_id) {
 // Function to restore a deleted folder
 async function restoreDeletedFolder(folder_id) {
   try {
-    const response = await fetch( `http://127.0.0.1:8000/deleted/files/restore/${folder_id}`, {
-    method: "PUT",
-    headers: {
-        "Content-Type": "application/json",
-      },
-    credentials: "include", // Include cookies in the request
-  });
+    const response = await fetch(
+      `http://127.0.0.1:8000/deleted/files/restore/${folder_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // Include cookies in the request
+      }
+    );
 
     console.log("Folder restored successfully:", response);
     return response;
@@ -695,23 +696,23 @@ async function get_name() {
   }
 }
 async function logout() {
-    try {
-        const headers = {
-          "Content-Type": "application/json",
-        };
-        const response = await fetch("http://127.0.0.1:8000/logout", {
-          method: "POST",
-          headers: headers,
-        });
-        if (response.ok) {
-          const data = await response.json(); // Parsing response JSON
-          return data; // Return the parsed data
-        } else {
-            throw new Error("Unexpected Error");
-        }
-    } catch (err) {
-        throw err;
+  try {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const response = await fetch("http://127.0.0.1:8000/logout", {
+      method: "POST",
+      headers: headers,
+    });
+    if (response.ok) {
+      const data = await response.json(); // Parsing response JSON
+      return data; // Return the parsed data
+    } else {
+      throw new Error("Unexpected Error");
     }
+  } catch (err) {
+    throw err;
+  }
 }
 export {
   registerUser,

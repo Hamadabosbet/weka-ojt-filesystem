@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import { addFolder } from "../Dal/data.js";
-const CreateFolder = ({ onClose }) => {
-  const handleClose = () => {
-    onClose();
-  };
 
+const CreateFolder = ({ onClose }) => {
   const [newFolderName, setNewFolderName] = useState("");
 
   const handleChange = (event) => {
@@ -15,13 +12,12 @@ const CreateFolder = ({ onClose }) => {
   const handleCreate = async () => {
     try {
       // Call the addFolder API
-      const response = await addFolder(1, newFolderName); // Assuming folderId is accessible in this scope
+      const response = await addFolder(1, newFolderName); // Assuming the user ID is 1
       if (response) {
-        handleClose();
-        // Optionally, you can perform additional actions upon successful folder creation
+        onClose(); // Close the modal after successful folder creation
         console.log("Folder created successfully");
-      }
-      else {
+        // Pass the newly created folder data back to the parent component
+      } else {
         console.error("Failed to create folder");
         // Optionally, you can display an error message to the user
       }
@@ -32,31 +28,33 @@ const CreateFolder = ({ onClose }) => {
   };
 
   return (
-    <>
-      <Modal show={true} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create a Folder:</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Control
-            type="text"
-            placeholder="Enter folder name"
-            value={newFolderName}
-            onChange={handleChange}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleCreate}>
-            Create
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+    <Modal show={true} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Create a Folder</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Form.Group controlId="folderName">
+            <Form.Label>Folder Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter folder name"
+              value={newFolderName}
+              onChange={handleChange}
+            />
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleCreate}>
+          Create
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
 export default CreateFolder;
-
