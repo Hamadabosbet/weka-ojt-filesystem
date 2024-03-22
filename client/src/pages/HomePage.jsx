@@ -144,7 +144,7 @@ const HomePage = () => {
         style={{ marginTop: "2px", marginBottom: "2px" }}
         className={isOpen ? "sidebar-open" : "sidebar-close"}
       >
-        <Toolbar onSort={handleSort} onSearch={handleSearch} handleCreateFolder={handleCreateFolder}/>
+        <Toolbar onSort={handleSort} onSearch={handleSearch} onCreateFolder={handleCreateFolder}/>
       </Container>
 
       <Container

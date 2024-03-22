@@ -21,6 +21,7 @@ const handleOptionSelect = (selectedOption) => {
   } else if (selectedOption.value === "newfolder") {
     setShowNewFolder(true);
     onCreateFolder();
+    
   }
 
 };
