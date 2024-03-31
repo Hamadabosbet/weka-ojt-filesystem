@@ -29,7 +29,7 @@ def insert_file_details_to_database(file_name, user_id, folder_id, file_size, up
     try:
         # Insert file details into the database
         query = """
-        INSERT INTO File (name, user_id, folder_id, size, is_deleted, upload_date, path)
+        INSERT INTO file (name, user_id, folder_id, size, is_deleted, upload_date, path)
         VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
         values = (file_name, user_id, folder_id, file_size, False, upload_date, file_path)

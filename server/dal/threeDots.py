@@ -10,8 +10,8 @@ def get_versions_for_file(file_id):
     # Fetch versions for the given file_id using a single query
     cursor.execute("""
     SELECT fv.id,fv.file_id ,fv.name, fv.upload_date 
-    FROM FileVersion fv 
-    INNER JOIN File f ON fv.id = f.group_id 
+    FROM fileversion fv 
+    INNER JOIN file f ON fv.id = f.group_id 
     WHERE f.id = %s
     """, (file_id,))
     versions = cursor.fetchall()

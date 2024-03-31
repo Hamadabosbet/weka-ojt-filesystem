@@ -213,7 +213,7 @@ def get_shared_file_data(file_id,user_id):
 
     connection = get_database_connection()
     cursor = connection.cursor()
-    get_query = "Select * From file Where id=? user_id = (SELECT shared_by_user_id FROM SharedFile WHERE file_id=? AND shared_with_user_id=?);"
+    get_query = "Select * From file Where id=? user_id = (SELECT shared_by_user_id FROM sharedfile WHERE file_id=? AND shared_with_user_id=?);"
 
     try:
         cursor.execute(get_query, (file_id, file_id, user_id))

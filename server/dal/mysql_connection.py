@@ -5,7 +5,7 @@ def get_database_connection():
 
     # Establish a connection to the MySQL server
     connection = mysql.connector.connect(
-        host='localhost',
+        host=mysql_details.host,
         user=mysql_details.user,
         password=mysql_details.password,
         port='3306',
